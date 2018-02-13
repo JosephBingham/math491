@@ -4,5 +4,5 @@ tex:
 	ghostscript thesis.pdf
 git:
 	git add *
-	git commit
+	git commit -m "commiting"
 	git push origin master
