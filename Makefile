@@ -1,5 +1,6 @@
 git:
+	dt=date
 	git add *
-	git commit -m "$(date) - working"
+	git commit -m "$dt - working"
 	git push origin master
 
