@@ -1,0 +1,31 @@
+-pick algorithm to detect
+
+github? y 
+grant? y (internal)
+deliverables? y 
+technologies? up in the air
+publish? y 
+
+
+
+LIT:
+google scholar (broad)
+targetted journal and confrences (respected)
+genetic -> steganalysis
+other parallel stego algorithms ? success?
+
+TODO:
+
+fourth order corilation -
+2012 - jessica fridrich suni bingamton KODOVSKI JAN author 
+- fisher linear ensemble classifier
+CHI^2 test in spacial domain
+modeling problem for images
+information theory
+Kullback-Lieber (KL) divergence measure info theory 
+encoding theory
+jpeg transform domain 
+Mandel-steg? NOT SECURE
+
+
+TOP 10 articles with summary for genetic and parallel -> stego 

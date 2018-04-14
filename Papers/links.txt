@@ -1,0 +1,10 @@
+https://link.springer.com/article/10.1155/2010/876946
+http://ieeexplore.ieee.org/abstract/document/1580616/
+https://dl.acm.org/citation.cfm?id=3167510 --looks good but needs ACM sub
+https://link.springer.com/article/10.1007/BF00175354
+https://link.springer.com/article/10.1134/S1064230710040088
+https://link.springer.com/chapter/10.1007/978-3-642-13681-8_47
+http://dde.binghamton.edu/download/stego_design/ -- code for stego
+http://dde.binghamton.edu/download/stego_algorithms/ -- code for stego
+http://dde.binghamton.edu/vholub/pdf/WIFS12_Designing_Steganographic_Distortion_Using_Directional_Filters.pdf -- for background on stego
+http://dde.binghamton.edu/kodovsky/pdf/ICASSP2013_Multivariate_Gaussian_model.pdf -- for background on stego
