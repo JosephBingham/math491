@@ -11,20 +11,21 @@ const double E = 2.7182818284590452353602874713526624977572470936999595749669676
 double gamm(double x) 
 {
     double ret = (1.000000000190015 + 
-                 76.18009172947146 / (x + 1) +  
+                 76.18009172947146  / (x + 1) +  
                  -86.50532032941677 / (x + 2) + 
-                 24.01409824083091 / (x + 3) +  
+                 24.01409824083091  / (x + 3) +  
                  -1.231739572450155 / (x + 4) + 
-                 1.208650973866179e-3 / (x + 5) + 
-                 -5.395239384953e-6 / (x + 6));
+                 .001208650973866179/ (x + 5) + 
+                 -.00005395239384953 / (x + 6));
     
-    return ret * sqrt(2*PI)/x * pow(x + 5.5, x+.5) * exp(-x-5.5);
+    return ret * sqrt(2.0*PI)/x * pow(x + 5.5, x+.5) * exp(-x-5.5);
 }
 
 double chisqrcdf(double x, double n) {
 	double a = 1/(gamm(n/2.0)*pow(2.0, n/2.0));
 	double b = pow(x, (n/2.0) - 1.0);
 	double c = pow(E, -x/2.0);
+	cout << a << "\n" << b << "\n" << c << endl;
 	return a*b*c;
 }
 
@@ -73,5 +74,5 @@ double chisq(int B[SIZE])
 
 int main(void)
 {
-	cout << chisqrcdf(2,2) << endl;
+	cout << chisqrcdf(3,3) << endl;
 }
