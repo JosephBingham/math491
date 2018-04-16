@@ -113,7 +113,7 @@ class Solution
 				this->fitVal[i] = 0;
 				for(int j = 0; j < 4; j++)
 				{
-					values[i][j] = rand();
+					values[i][j] = rand() % (IMG_SIZE/4);
 				}
 			}
 		}
