@@ -4,7 +4,7 @@ git:
 	git push origin master
 
 thesis:
-	pdflatex thesis.tex
-	rm thesis.log	
-	rm thesis.aux
+	pdflatex /Papers/thesis.tex
+	rm /Papers/thesis.log	
+	rm /Papers/thesis.aux
 
