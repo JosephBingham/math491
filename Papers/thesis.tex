@@ -1,6 +1,6 @@
 \title{High Performance Genetic Algorithms for Steganalysis}
 \author{
-Joseph Bingham \\
+Joseph Charles Bingham \\
 Department of Mathematics\\
 Iowa State University of Science and Technology\\
 Ames, Iowa 50010, \underline{United States of America} \\
@@ -13,8 +13,9 @@ jbingham@iastate.edu
 \maketitle
 
 \begin{abstract}
-\quad This research will outline a novel implementation of a genetic algorithm that leverages high performance parallelizations to detect 
-steganaraphically embedded images. The two main components that are new to this project are the application of parallelization for genetic algorithms and the application of genetic algorithm for steganalysis. Typical steganalytic methods which use machine learning techniques require an unreasonable amount of pre-classified data and copious amounts of time for training the engine. The data needed for such operation usually must be lab generated, which can lead to the biases when compared to real world, and often is constrained to specific parameters, such as they must remain within either the spacial domain or the JPEG domain, must be the same pixel width, etc., making these engines limited to what image space they detect over. The need for all data to be used in training the engine, as well as the linear nature of the engines used precludes them from 
+\par This research will outline a novel implementation of a genetic algorithm that leverages high performance parallelizations to detect 
+steganaraphically embedded images. The two main components that are new to this project are the application of parallelization for genetic algorithms and the application of genetic algorithm for steganalysis. Typical steganalytic methods which use machine learning techniques require an unreasonable amount of pre-classified data and copious amounts of time for training the engine. The data needed for such operation usually must be lab generated, which can lead to the biases when compared to real world, and often is constrained to specific parameters, such as they must remain within either the spacial domain or the JPEG domain, must be the same pixel width, etc., making these engines limited to what image space they detect over. The need for all data to be used in training the engine, as well as the linear nature of the engines used precludes them from being parallelized in any meaningful fashion. 
+\par This new algorithm does not succumb to these shortfalls. By using solution sets of pixels as the data which the cognitive engine trains over, and fixing the image(s) under suspicion, the engine can be parallelized 
 
 \end{abstract}
 
