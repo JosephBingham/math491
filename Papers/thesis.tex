@@ -32,7 +32,14 @@ steganaraphically embedded images. The two main components that are new to this 
 \section{Implementation :: Theory}
 \paragraph{Genetic Algorithm for Steganalysis}
 \par One of the novel components to this proposal is the use of genetic algorithm for steganalysis. The thought behind this is to generate a classifier for steganographically embedded images versus normal cover images.
-\par This will be done by creating a evolutionary solution for a path finding algorithm. The path finding algorithm will optimize the possible paths of embedding to determine the probability of payload being embedded. If the genetic algorithm?s internal weight function is triggered, then the probability along the path found was deemed high enough to consider the image having a payload embedded.
+\par This will be done by creating a evolutionary solution for a path finding algorithm. The path finding algorithm will optimize the possible paths of embedding to determine the probability of payload being embedded. If the genetic algorithm's internal weight function is triggered, then the probability along the path found was deemed high enough to consider the image having a payload embedded.
+\paragraph{Parallel Implementation of Genetic Algorithms}
+\par The other novel component is the parallelization of genetic
+algorithms to speed up the training time of the evolutionary model. The reason this project will require the will require a parallel training model, as opposed to a serial implementation, because the quantity of data that needs to be ingested by the engine is immense.
+\par The parallelization will be achieved by using a "island" inspired model. This is where each node of the cluster getting its own evolutionary model, but with the same cost function. Then after some number of iterations, the nodes give each other their top solutions to reproduce with the other solutions. This will hopefully speed up, and aid with, the convex optimization.
+
+
+\section{Implementation :: Code}
 
 \section{Results}
 
