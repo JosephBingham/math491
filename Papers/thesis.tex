@@ -29,8 +29,10 @@ steganaraphically embedded images. The two main components that are new to this 
 \par The tester bot tests each solution based on the cost function. Its job is to determine what the value of the test function and to rank each solution.
 \par The builder bot takes each the best solutions, as ranked by the tester bot, generates more solutions based on their attributes. It generates the new solutions by randomly modifying the best solutions in hopes of descending the gradient.
 
-\section{Previous work}
-
+\section{Implementation :: Theory}
+\paragraph{Genetic Algorithm for Steganalysis}
+\par One of the novel components to this proposal is the use of genetic algorithm for steganalysis. The thought behind this is to generate a classifier for steganographically embedded images versus normal cover images.
+\par This will be done by creating a evolutionary solution for a path finding algorithm. The path finding algorithm will optimize the possible paths of embedding to determine the probability of payload being embedded. If the genetic algorithm?s internal weight function is triggered, then the probability along the path found was deemed high enough to consider the image having a payload embedded.
 
 \section{Results}
 
