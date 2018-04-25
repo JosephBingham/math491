@@ -11,7 +11,7 @@ jbingham@iastate.edu
 \documentclass[12pt]{article} 
 \begin{document}
 \maketitle
-
+\textbf{array}
 \begin{abstract}
 \par This research will outline a novel implementation of a genetic algorithm that leverages high performance parallelizations to detect 
 steganaraphically embedded images. The two main components that are new to this project are the application of parallelization for genetic algorithms and the application of genetic algorithm for steganalysis. Typical steganalytic methods which use machine learning techniques require an unreasonable amount of pre-classified data and copious amounts of time for training the engine. The data needed for such operation usually must be lab generated, which can lead to the biases when compared to real world, and often is constrained to specific parameters, such as they must remain within either the spacial domain or the JPEG domain, must be the same pixel width, etc., making these engines limited to what image space they detect over. The need for all data to be used in training the engine, as well as the linear nature of the engines used precludes them from being parallelized in any meaningful fashion. 
@@ -31,8 +31,25 @@ steganaraphically embedded images. The two main components that are new to this 
 
 \section{Implementation :: Theory}
 \paragraph{Genetic Algorithm for Steganalysis}
-\par One of the novel components to this proposal is the use of genetic algorithm for steganalysis. The thought behind this is to generate a classifier for steganographically embedded images versus normal cover images.
+\par One of the novel components to this research is the use of genetic algorithm for steganalysis. The thought behind this is to generate a classifier for steganographically embedded images versus normal cover images.
 \par This will be done by creating a evolutionary solution for a path finding algorithm. The path finding algorithm will optimize the possible paths of embedding to determine the probability of payload being embedded. If the genetic algorithm's internal weight function is triggered, then the probability along the path found was deemed high enough to consider the image having a payload embedded.
+\par The weight function is the $\chi ^ 2$-attack from steganalysis (4). The basis of this attack is that grey scale values that differ by only the last bit (the bit that is overwritten) will show up equally in the embedding path. This is because an LSB within the embedding path has an equal likelihood of being 0 or 1.
+For example: \\
+An image, I, whose pixels are represented by the matrix \\
+$ \left[ \begin{array}{cccc}
+ 101 & 011 & 111 & 100\\
+  001 & 001 & 100 & 001\\
+ 101 & 110 & 010 & 101 \\
+ 101 & 110 & 010 & 101 \\  \end{array} \right] $ 
+ \\ with a lexicographical embedding of the message stream 
+ \\ $ \left[ \begin{array}{c} 1,  0 , 1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0 \end{array} \right] $
+\\ will become I'
+ \\ $ \left[ \begin{array}{cccc}
+ 101 & 010 & 111 & 100\\
+  001 & 000 & 101 & 000\\
+ 101 & 110 & 011 & 100 \\
+ 101 & 110 & 011 & 100 \\  \end{array} \right] $ 
+ 
 \paragraph{Parallel Implementation of Genetic Algorithms}
 \par The other novel component is the parallelization of genetic
 algorithms to speed up the training time of the evolutionary model. The reason this project will require the will require a parallel training model, as opposed to a serial implementation, because the quantity of data that needs to be ingested by the engine is immense.
@@ -49,6 +66,7 @@ algorithms to speed up the training time of the evolutionary model. The reason t
 \section{Bibliography}
 (1) https://link.springer.com/article/10.1155/2010/876946 \\
 (2) https://www.sans.org/reading-room/whitepapers/stenganography/steganalysis-detecting-hidden-information-computer-forensic-analysis-1014 \\
-(3) https://link.springer.com/article/10.1007/BF00175354
+(3) https://link.springer.com/article/10.1007/BF00175354 \\
+(4) https://orion.math.iastate.edu/dept/thesisarchive/MSCC/CStanleyMSSS05.pdf
 \end{document}
 
