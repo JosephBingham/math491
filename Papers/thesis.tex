@@ -9,6 +9,7 @@ jbingham@iastate.edu
 \date{\today}
 \documentclass[12pt]{article}
 \usepackage{graphicx}
+\usepackage{amssymb}
 \graphicspath{ }
 \begin{document}
 \maketitle
@@ -36,23 +37,34 @@ steganaraphically embedded images. The two main components that are new to this 
 \par This will be done by creating a evolutionary solution for a path finding algorithm. The path finding algorithm will optimize the possible paths of embedding to determine the probability of payload being embedded. If the genetic algorithm's internal weight function is triggered, then the probability along the path found was deemed high enough to consider the image having a payload embedded.
 \par The weight function is the $\chi ^ 2$-attack from steganalysis (4). The basis of this attack is that grey scale values that differ by only the last bit (the bit that is overwritten) will show up equally in the embedding path. This is because an LSB within the embedding path has an equal likelihood of being 0 or 1.
 For example: \\
-An image, I, whose pixels are represented by the matrix \\ \\
+An image, I, whose pixels are represented by 3 randomly generated bits in the following matrix : 
+\begin{center}
 $  \left[ \begin{array}{cccc} 
  101 & 011 & 111 & 100\\
   001 & 001 & 100 & 001\\
  101 & 110 & 010 & 101 \\
  101 & 110 & 010 & 101 \\  \end{array} \right] $ 
-\\ \\ with a lexicographical embedding of the message stream 
-\\ \\ $ \left[ \begin{array}{c} 1,  0 , 1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0 \end{array} \right] $
-\\ \\ will become I'
-\\ \\ $ \left[ \begin{array}{cccc}
+\end{center}
+with a lexicographical embedding of the message stream 
+\begin{center}
+$ \left[ \begin{array}{c} 1,  0 , 1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0 \end{array} \right] $
+\end{center}
+will become I'
+
+\begin{center}
+ $ \left[ \begin{array}{cccc}
  101 & 010 & 111 & 100\\
   001 & 000 & 101 & 000\\
  101 & 110 & 011 & 100 \\
  101 & 110 & 011 & 100 \\  \end{array} \right] $ 
- 
+\end{center} 
 \newpage This gives the histograms, \\ \\  
-\includegraphics{ {histogramI.png}}
+
+\includegraphics[scale=.45]{histogramI.png} 
+\includegraphics[scale=.45]{histogramIprime.png} 
+\par As one can see, the values before the embedding, I, are far less pairwise normalized than those in I'. By feeding these pairwise differences into the cumulative distribution function for the $\chi^2$ distribution, with the degree of freedom equal to the number of bins in the sample set, we get a value that is between 0 and 1, and is directly correlated to how likely it is that the pixels are stegonagraphically embedded. This provides us with a function 
+$ F : {\mathbb{Z}_{2^k}^{n^2}} \mapsto [0, 1] $, where k is the bit-width of the pixels and n is the side-length of the image in pixels. This provides a natural candidate for use as a fitness function.
+\par The tester bot goes through each solution of pixels and evaluates 
 
 \paragraph{Parallel Implementation of Genetic Algorithms}
 \par The other novel component is the parallelization of genetic
