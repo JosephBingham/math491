@@ -10,6 +10,8 @@ jbingham@iastate.edu
 \documentclass[12pt]{article}
 \usepackage{graphicx}
 \usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
 \graphicspath{ }
 \begin{document}
 \maketitle
@@ -63,8 +65,8 @@ will become I'
 \includegraphics[scale=.45]{histogramI.png} 
 \includegraphics[scale=.45]{histogramIprime.png} 
 \par As one can see, the values before the embedding, I, are far less pairwise normalized than those in I'. By feeding these pairwise differences into the cumulative distribution function for the $\chi^2$ distribution, with the degree of freedom equal to the number of bins in the sample set, we get a value that is between 0 and 1, and is directly correlated to how likely it is that the pixels are stegonagraphically embedded. This provides us with a function 
-$ F : {\mathbb{Z}_{2^k}^{n^2}} \mapsto [0, 1] $, where k is the bit-width of the pixels and n is the side-length of the image in pixels. This provides a natural candidate for use as a fitness function.
-\par The tester bot goes through each solution of pixels and evaluates 
+$ F : {\mathbb{Z}_{2^k}^{n^2}} \mapsto [0, 1] $, where k is the bit-width of the pixels and n is the side-length of the image in pixels. For the above example, k = 3 and n = 4. This provides a natural candidate for use as a fitness function.
+\par The tester bot goes through each solution of pixels and evaluates them based on this fitness function, and ranks them on this value.A key difference between this genetic algorithm and other genetic algorithms is that the typical actor of the data over which the genetic algorithm would be the images that are under suspicion. However, in this algorithm, the data is the solution set and the image is fixed. This allows for a much more compact implementation with regards to memory as each solution would only need to keep track of the pixels it is referencing, and not all of the images. 
 
 \paragraph{Parallel Implementation of Genetic Algorithms}
 \par The other novel component is the parallelization of genetic
@@ -73,6 +75,35 @@ algorithms to speed up the training time of the evolutionary model. The reason t
 
 
 \section{Implementation :: Code}
+This section will include some highlights of the code implementation, along with the mathematical reasoning and proofs of their complexities.
+\lstset { 
+    language=C++,
+    basicstyle=\footnotesize,
+}
+\begin{lstlisting}
+/*
+gamm:
+param: double x, input to function
+return: double, the gamma function applied
+implemented using an approximation.
+This was an approximation using a rational approximation found by SCHMELZER
+and TREFETHEN
+https://people.maths.ox.ac.uk/trefethen/publication/PDF/2007_122.pdf
+*/
+double gamm(double x) 
+{
+    double ret = (1.000000000190015 + 
+                 76.18009172947146  / (x + 1) +  
+                 -86.50532032941677 / (x + 2) + 
+                 24.01409824083091  / (x + 3) +  
+                 -1.231739572450155 / (x + 4) + 
+                 1.208650973866179e-3/ (x + 5) + 
+                 -5.395239384953e-5 / (x + 6));
+    
+    return ret * sqrt(2.0*PI)/x * pow(x + 5.5, x+.5) * exp(-x-5.5);
+}
+
+\end{lstlisting}
 
 \section{Results}
 
