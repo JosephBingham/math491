@@ -113,7 +113,105 @@ stset {
     basicstyle=\footnotesize,
 }
 \begin{lstlisting}
-
+  Solution *mixSolutions(Solution *other)
+  {
+   Solution *ret = new Solution;
+   for(int i = 0; i < 4; i++)
+   {
+    if(this->fitVal[i] >= other->fitVal[i])
+    {
+     int k = 0;
+     int T[SOL_SIZE * 2] = {0};
+     for(int j = 0; j < SOL_SIZE; j++)
+     {
+      T[this->values[i][j]]++;
+      T[other->values[i][j]]++;
+     }
+     for(int j = 0; j < SOL_SIZE*2; j++)
+     {
+      if(T[j] == 2)
+      {
+       ret->values[i][k] = T[j];
+       k++;
+      }
+     }
+     int upperLim = (SOL_SIZE - k)*(this->fitVal[i]/other->fitVal[i]);
+     while(k < upperLim)
+     {
+      for(int l = 0; l < SOL_SIZE; l++)
+      {
+       if(!in(this->values[i][l], ret->values[i])
+       {
+        ret->values[i][k] = this->values[i][l];
+        k++;
+        break;
+       }
+      }
+     }
+     while(k < SOL_SIZE)
+     {
+      for(int l = 0; l < SOL_SIZE; l++)
+      {
+       if(!in(other->values[i][l], ret->values[i])
+       {
+        ret->values[i][k] = other->values[i][l];
+        k++;
+        break;
+       }
+      }
+     }
+    }
+    else
+    {
+     int k = 0;
+     int T[SOL_SIZE * 2] = {0};
+     for(int j = 0; j < SOL_SIZE; j++)
+     {
+      T[this->values[i][j]]++;
+      T[other->values[i][j]]++;
+     }
+     for(int j = 0; j < SOL_SIZE*2; j++)
+     {
+      if(T[j] == 2)
+      {
+       ret->values[i][k] = T[j];
+       k++;
+      }
+     }
+     int upperLim = (SOL_SIZE - k)*(this->fitVal[i]/other->fitVal[i]);
+     while(k < upperLim)
+     {
+      for(int l = 0; l < SOL_SIZE; l++)
+      {
+       if(!in(this->values[i][l], ret->values[i])
+       {
+        ret->values[i][k] = this->values[i][l];
+        k++;
+        break;
+       }
+      }
+     }
+     while(k < SOL_SIZE)
+     {
+      for(int l = 0; l < SOL_SIZE; l++)
+      {
+       if(!in(other->values[i][l], ret->values[i])
+       {
+        ret->values[i][k] = other->values[i][l];
+        k++;
+        break;
+       }
+      }
+     }
+    }
+    int a = rand();
+    if((a %= 400) < 4 && !in(a, ret->values[i])
+    {
+     ret->values[i][a] = ret->values[i][rand() % (SOL_SIZE)];
+    }
+   }
+   return ret;  
+  }
 \end{lstlisting}
 %\section{Results}
 
