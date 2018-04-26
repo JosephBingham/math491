@@ -7,8 +7,9 @@ Ames, Iowa 50010, United States of America \\
 jbingham@iastate.edu
 }
 \date{\today}
-
-\documentclass[12pt]{article} 
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\graphicspath{ }
 \begin{document}
 \maketitle
 
@@ -35,21 +36,24 @@ steganaraphically embedded images. The two main components that are new to this 
 \par This will be done by creating a evolutionary solution for a path finding algorithm. The path finding algorithm will optimize the possible paths of embedding to determine the probability of payload being embedded. If the genetic algorithm's internal weight function is triggered, then the probability along the path found was deemed high enough to consider the image having a payload embedded.
 \par The weight function is the $\chi ^ 2$-attack from steganalysis (4). The basis of this attack is that grey scale values that differ by only the last bit (the bit that is overwritten) will show up equally in the embedding path. This is because an LSB within the embedding path has an equal likelihood of being 0 or 1.
 For example: \\
-An image, I, whose pixels are represented by the matrix \\
-$ \left[ \begin{array}{cccc}
+An image, I, whose pixels are represented by the matrix \\ \\
+$  \left[ \begin{array}{cccc} 
  101 & 011 & 111 & 100\\
   001 & 001 & 100 & 001\\
  101 & 110 & 010 & 101 \\
  101 & 110 & 010 & 101 \\  \end{array} \right] $ 
- \\ with a lexicographical embedding of the message stream 
- \\ $ \left[ \begin{array}{c} 1,  0 , 1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0 \end{array} \right] $
-\\ will become I'
- \\ $ \left[ \begin{array}{cccc}
+\\ \\ with a lexicographical embedding of the message stream 
+\\ \\ $ \left[ \begin{array}{c} 1,  0 , 1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0 \end{array} \right] $
+\\ \\ will become I'
+\\ \\ $ \left[ \begin{array}{cccc}
  101 & 010 & 111 & 100\\
   001 & 000 & 101 & 000\\
  101 & 110 & 011 & 100 \\
  101 & 110 & 011 & 100 \\  \end{array} \right] $ 
  
+\newpage This gives the histograms, \\ \\  
+\includegraphics{ {histogramI.png}}
+
 \paragraph{Parallel Implementation of Genetic Algorithms}
 \par The other novel component is the parallelization of genetic
 algorithms to speed up the training time of the evolutionary model. The reason this project will require the will require a parallel training model, as opposed to a serial implementation, because the quantity of data that needs to be ingested by the engine is immense.
