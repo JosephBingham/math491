@@ -49,7 +49,7 @@ double chisqrcdf(double x, double n) {
 	double a = 1/(gamm(n/2.0)*pow(2.0, n/2.0));
 	double b = pow(x, (n/2.0) - 1.0);
 	double c = pow(E, -x/2.0);
-	cout << a << "\n" << b << "\n" << c << endl;
+	//cout << a << "\n" << b << "\n" << c << endl;
 	return a*b*c;
 }
 
@@ -109,6 +109,18 @@ class Solution
 		int values[4][SOL_SIZE];
 		/* fitness values for fitness values for the 4 sections*/
 		double fitVal[4];
+		/* simple membership checking function*/
+		bool in(int num, int *vals)
+		{
+			for(int i = 0; i < SOL_SIZE; i++)
+			{
+				if(num == vals[i])
+				{
+					return false;
+				}
+			}
+			return true;
+		}
 	
 	public:
 		Solution()
@@ -123,37 +135,99 @@ class Solution
 			}
 		}
 		
-		Solution *mixSolutions(Solution other)
+		Solution *mixSolutions(Solution *other)
 		{
 			Solution *ret = new Solution;
 			for(int i = 0; i < 4; i++)
 			{
-				if(this->fitVal[i] >= other.fitVal[i])
+				if(this->fitVal[i] >= other->fitVal[i])
 				{
 					int k = 0;
 					int T[SOL_SIZE * 2] = {0};
 					for(int j = 0; j < SOL_SIZE; j++)
 					{
 						T[this->values[i][j]]++;
-						T[other.values[i][j]]++;
+						T[other->values[i][j]]++;
 					}
 					for(int j = 0; j < SOL_SIZE*2; j++)
 					{
 						if(T[j] == 2)
 						{
-							
+							ret->values[i][k] = T[j];
+							k++;
+						}
+					}
+					int upperLim = (SOL_SIZE - k)*(this->fitVal[i]/other->fitVal[i]);
+					while(k < upperLim)
+					{
+						for(int l = 0; l < SOL_SIZE; l++)
+						{
+							if(!in(this->values[i][l], ret->values[i])
+							{
+								ret->values[i][k] = this->values[i][l];
+								k++;
+								break;
+							}
+						}
+					}
+					while(k < SOL_SIZE)
+					{
+						for(int l = 0; l < SOL_SIZE; l++)
+						{
+							if(!in(other->values[i][l], ret->values[i])
+							{
+								ret->values[i][k] = other->values[i][l];
+								k++;
+								break;
+							}
 						}
 					}
 				}
 				else
 				{
+					int k = 0;
+					int T[SOL_SIZE * 2] = {0};
 					for(int j = 0; j < SOL_SIZE; j++)
 					{
-						ret->values[i][j] = other.values[i][j];
+						T[this->values[i][j]]++;
+						T[other->values[i][j]]++;
+					}
+					for(int j = 0; j < SOL_SIZE*2; j++)
+					{
+						if(T[j] == 2)
+						{
+							ret->values[i][k] = T[j];
+							k++;
+						}
+					}
+					int upperLim = (SOL_SIZE - k)*(this->fitVal[i]/other->fitVal[i]);
+					while(k < upperLim)
+					{
+						for(int l = 0; l < SOL_SIZE; l++)
+						{
+							if(!in(this->values[i][l], ret->values[i])
+							{
+								ret->values[i][k] = this->values[i][l];
+								k++;
+								break;
+							}
+						}
+					}
+					while(k < SOL_SIZE)
+					{
+						for(int l = 0; l < SOL_SIZE; l++)
+						{
+							if(!in(other->values[i][l], ret->values[i])
+							{
+								ret->values[i][k] = other->values[i][l];
+								k++;
+								break;
+							}
+						}
 					}
 				}
 				int a = rand();
-				if((a %= 400) < 5)
+				if((a %= 400) < 4)
 				{
 					ret->values[i][a] = ret->values[i][rand() % (SOL_SIZE)];
 				}

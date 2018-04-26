@@ -61,16 +61,19 @@ will become I'
  101 & 110 & 011 & 100 \\  \end{array} \right] $ 
 \end{center} 
 \newpage This gives the histograms, \\ \\  
-
+\begin{center}
 \includegraphics[scale=.45]{histogramI.png} 
 \includegraphics[scale=.45]{histogramIprime.png} 
+\end{center}
 \par As one can see, the values before the embedding, I, are far less pairwise normalized than those in I'. By feeding these pairwise differences into the cumulative distribution function for the $\chi^2$ distribution, with the degree of freedom equal to the number of bins in the sample set, we get a value that is between 0 and 1, and is directly correlated to how likely it is that the pixels are stegonagraphically embedded. This provides us with a function 
 $ F : {\mathbb{Z}_{2^k}^{n^2}} \mapsto [0, 1] $, where k is the bit-width of the pixels and n is the side-length of the image in pixels. For the above example, k = 3 and n = 4. This provides a natural candidate for use as a fitness function.
 \par The tester bot goes through each solution of pixels and evaluates them based on this fitness function, and ranks them on this value.A key difference between this genetic algorithm and other genetic algorithms is that the typical actor of the data over which the genetic algorithm would be the images that are under suspicion. However, in this algorithm, the data is the solution set and the image is fixed. This allows for a much more compact implementation with regards to memory as each solution would only need to keep track of the pixels it is referencing, and not all of the images. 
+\par For testing the functions, the bot not only tests the overall fitness of the total solution, but it also chunks the solution into four, with the first fourth being the pixels of the solution which lie within the first quarter of the image lexicographically, the second fourth being from the second fourth of the image and so on. The bot then evaluates the fitness of each chunk.  
+\par The philosophy of the builder bot for this implementation is combine two solutions based on their fitness scores in such a way that gives priority to pixels that appear in both, then pixels from the solution with the higher fitness, then random pixels from the same section of the image (to add nondeterminism into the solutions). This is done by taking the intersection of the two sets, add these to the new solution. Then adding the an amount determined by the ratio of the two fitness values from remainder of the pixels from each solution. Then randomly changing up to one pixel. This will have the solutions converge to the highest fitness value, which will be used to determine whether the image has been embedded. 
 
 \paragraph{Parallel Implementation of Genetic Algorithms}
 \par The other novel component is the parallelization of genetic
-algorithms to speed up the training time of the evolutionary model. The reason this project will require the will require a parallel training model, as opposed to a serial implementation, because the quantity of data that needs to be ingested by the engine is immense.
+algorithms to speed up the training time of the evolutionary model. The reason this project will require the will require a parallel training model, as opposed to a serial implementation, because the quantity of data (the solution sets) that needs to be ingested by the engine is immense.
 \par The parallelization will be achieved by using a "island" inspired model. This is where each node of the cluster getting its own evolutionary model, but with the same cost function. Then after some number of iterations, the nodes give each other their top solutions to reproduce with the other solutions. This will hopefully speed up, and aid with, the convex optimization.
 
 
@@ -88,7 +91,7 @@ return: double, the gamma function applied
 implemented using an approximation.
 This was an approximation using a rational approximation found by SCHMELZER
 and TREFETHEN
-https://people.maths.ox.ac.uk/trefethen/publication/PDF/2007_122.pdf
+The memory complexity of this is O(1) and time complexity of O(1)
 */
 double gamm(double x) 
 {
@@ -102,10 +105,17 @@ double gamm(double x)
     
     return ret * sqrt(2.0*PI)/x * pow(x + 5.5, x+.5) * exp(-x-5.5);
 }
+\end{lstlisting}
+By an easy inspection, the memory complexity of this is O(1) and time complexity of O(1), as there is no dynamically allocated memory, nor are there any loops (5).
+//
+stset { 
+    language=C++,
+    basicstyle=\footnotesize,
+}
+\begin{lstlisting}
 
 \end{lstlisting}
-
-\section{Results}
+%\section{Results}
 
 
 \section{Conclusions}
@@ -114,6 +124,7 @@ double gamm(double x)
 (1) https://link.springer.com/article/10.1155/2010/876946 \\
 (2) https://www.sans.org/reading-room/whitepapers/stenganography/steganalysis-detecting-hidden-information-computer-forensic-analysis-1014 \\
 (3) https://link.springer.com/article/10.1007/BF00175354 \\
-(4) https://orion.math.iastate.edu/dept/thesisarchive/MSCC/CStanleyMSSS05.pdf
+(4) https://orion.math.iastate.edu/dept/thesisarchive/MSCC/CStanleyMSSS05.pdf \\
+(5) https://people.maths.ox.ac.uk/trefethen/publication/PDF/2007\_122.pdf
 \end{document}
 
