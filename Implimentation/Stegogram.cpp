@@ -1,6 +1,7 @@
 #include<iostream>
 #include<stdlib.h>
 #include<math.h>
+#include<opencv2/opencv.hpp>
 using namespace std;
 
 #ifndef SIZE
@@ -18,7 +19,15 @@ using namespace std;
 
 const double PI = 3.1415926535897932384626433832795028841971693993751058209749445923;
 const double E  = 2.7182818284590452353602874713526624977572470936999595749669676277;
-FILE *file = fopen("/User/user/Desktop/math491/stego06_0512.png","r");
+string filePath = "/User/user/Desktop/math491/stego06_0512.png";
+int *bitImg = NULL;
+
+
+int *openfile(void){
+//	cv::Mat img = cv::imread(filePath);
+	return NULL;
+}
+
 
 /*
 	gamm:
@@ -162,7 +171,7 @@ class Solution
 					{
 						for(int l = 0; l < SOL_SIZE; l++)
 						{
-							if(!in(this->values[i][l], ret->values[i])
+							if(!in(this->values[i][l], ret->values[i]))
 							{
 								ret->values[i][k] = this->values[i][l];
 								k++;
@@ -174,7 +183,7 @@ class Solution
 					{
 						for(int l = 0; l < SOL_SIZE; l++)
 						{
-							if(!in(other->values[i][l], ret->values[i])
+							if(!in(other->values[i][l], ret->values[i]))
 							{
 								ret->values[i][k] = other->values[i][l];
 								k++;
@@ -205,7 +214,7 @@ class Solution
 					{
 						for(int l = 0; l < SOL_SIZE; l++)
 						{
-							if(!in(this->values[i][l], ret->values[i])
+							if(!in(this->values[i][l], ret->values[i]))
 							{
 								ret->values[i][k] = this->values[i][l];
 								k++;
@@ -217,7 +226,7 @@ class Solution
 					{
 						for(int l = 0; l < SOL_SIZE; l++)
 						{
-							if(!in(other->values[i][l], ret->values[i])
+							if(!in(other->values[i][l], ret->values[i]))
 							{
 								ret->values[i][k] = other->values[i][l];
 								k++;
@@ -237,14 +246,8 @@ class Solution
 };
 
 
-int main(int argc, char *argv[])
+int main(void)//int argc, char *argv[)
 {
-	//if( argc < 2 )
-	//{
-	//	exit(0);	
-	//}
-	//char *filePath = argv[1];
-	//file = fopen(filePath, "r");
 	cout << getchar() << endl;
-	cout << chisqrcdf(3,3) << argc << argv << endl;
+	cout << chisqrcdf(3,3) << endl;
 }
