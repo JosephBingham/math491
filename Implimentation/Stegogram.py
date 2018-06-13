@@ -6,7 +6,17 @@ img = Image.open("stego06_0512.png")
 
 pixels = list(img.getdata())
 
-print len(pixels)**.5
+sideLength =  len(pixels)**.5
 
-#for i in pixels:
-#	print i
+if sideLength != int(sideLength):
+	raise Exception('THIS IS NOT A SQUARE, WHAT DO I DO WITH THIS??')
+
+print int(sideLength)
+
+print
+
+string = ""
+
+for i in pixels:
+	string += "," + str(i)
+print string[1:]

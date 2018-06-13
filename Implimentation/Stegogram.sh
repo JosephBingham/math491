@@ -1,4 +1,4 @@
-python Stegogram.py > Intermediate.csv
+python Stegogram.py > Pixels.csv
 
 make make
 
