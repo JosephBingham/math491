@@ -16,7 +16,10 @@ print int(sideLength)
 print
 
 string = ""
-
+j = 0
 for i in pixels:
+    j += 1
+    if j % int(sideLength) == 0:
+        string += '\n'
 	string += "," + str(i)
 print string[1:]
