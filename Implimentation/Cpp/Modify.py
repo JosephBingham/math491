@@ -32,7 +32,7 @@ if not new_file:
 with open('Stegogram.cpp', 'r+') as code:
     for line in code:
         if '/****/' in line:
-            new_file.write(line[:-7] + str(img_size)  + '\n')
+            new_file.write(line[:-7] + str(img_size)  + ';\n')
         elif '/*****/' in line:
 #            print line[:-8] + pixel_string
             new_file.write(line[:-9] + pixel_string + '\n')

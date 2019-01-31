@@ -3,26 +3,20 @@
 #include<math.h>
 using namespace std;
 
-#define IMG_SIZE /****/
+const int IMG_SIZE = /****/
 
-#ifndef SIZE
-#define SIZE 256
-#endif
-
-#ifndef IMG_SIZE
-#define IMG_SIZE 1024
-#endif
-
-#ifndef SOL_SIZE
-#define SOL_SIZE IMG_SIZE/8
-#endif
-
-
+const int SIZE = 256;
+const int SOL_SIZE = IMG_SIZE/8;
 const double PI = 3.1415926535897932384626433832795028841971693993751058209749445923;
 const double E  = 2.7182818284590452353602874713526624977572470936999595749669676277;
 
+int **image = (int **)malloc(IMG_SIZE * sizeof(int));
 
-int **image = /*****/
+for(int i = 0; i < IMG_SIZE; i++){
+	int *image[i] = (int *)malloc(IMG_SIZE * sizeof(int));
+}
+
+image = /*****/
 
 
 /*
